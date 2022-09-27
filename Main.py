@@ -1,9 +1,7 @@
 import pygame
 from random import randrange
-from time import sleep
 from tkinter import *
 
-# Janela representativa
 janela = Tk()
 janela.title('Guess game')
 
@@ -11,12 +9,11 @@ text1 = Label(janela, text="""
 ======================================================
 
 Olá, vamos brincar?
-Irei pensar em um número de 0 a 5. Tente adivinhar
+Irei pensar em um número de 0 a 10. Tente adivinhar
 
 ======================================================
     """, justify=CENTER)
 text1.grid(column=0, row=0)
-janela.geometry("500x500")
 
 
 def music():
@@ -26,19 +23,14 @@ def music():
     pygame.mixer.music.set_volume(0.2)
     pygame.mixer.music.play(-1, 0, 1000)
 
-    erro = pygame.mixer.Sound("erro.mp3")
-    vitoria = pygame.mixer.Sound("vitoria.mp3")
-    pygame.mixer.Sound.set_volume(erro, 0.05)
-    pygame.mixer.Sound.set_volume(vitoria, 0.05)
-
 
 def layout_game():
 
     music()
 
-    text2 = Label(janela, text="Em qual número eu estou pensando ?",
-                  justify=CENTER)
-    text2.grid(column=0, row=2)
+    text2 = Label(
+        janela, text="Em qual número eu estou pensando ?", justify=CENTER)
+    text2.grid(column=0, row=3)
 
     data = StringVar()
     textbox = Entry(janela, textvariable=data)
@@ -51,101 +43,33 @@ def layout_game():
 
 def guess(data):
 
-    resposta = Label(janela, text='')
-    resposta.grid(column=1, row=8)
+    erro = pygame.mixer.Sound("erro.mp3")
+    vitoria = pygame.mixer.Sound("vitoria.mp3")
+    pygame.mixer.Sound.set_volume(erro, 0.05)
+    pygame.mixer.Sound.set_volume(vitoria, 0.05)
 
-    a = 3
+    numero_aleatorio = randrange(11)
+    numero_usuario = int(data.get())
 
-    n1 = int(data.get())
+    print(numero_aleatorio)
 
-    # Condicionais.
-    x = n1  # Chance 1
-    if x == a:
-        # pygame.mixer.Sound.play(vitoria)
-        resposta["text"] == 'Parabéns!! Você acertou. O número que eu estou pensando é {}'.format(
-            a)
-        resposta["text"] == 'Tchaaaau'
+    if numero_aleatorio == numero_usuario:
+        pygame.mixer.Sound.play(vitoria)
+        resposta = """
+        Parabéns!! Você acertou. O número que eu estou pensando é {}""".format(a)
         pygame.mixer.music.fadeout(10000)
         pygame.mixer.music.set_volume(0.2)
+        Texto_resultado = Label(janela, text='', justify=CENTER)
+        Texto_resultado.grid(column=0, row=8)
+        Texto_resultado["text"] = resposta
         return ()
     else:
-        # pygame.mixer.Sound.play(erro)
-        resposta["text"] = 'Poxa, tente novamente'
-
-    x = n1  # Chance 2
-    if x == a:
-        # pygame.mixer.Sound.play(vitoria)
-        resposta["text"] = 'Parabéns!! Você acertou. O número que eu estou pensando é {}'.format(
-            a)
-        resposta["text"] = 'Tchaaaau'
-        pygame.mixer.music.fadeout(10000)
-        pygame.mixer.music.set_volume(0.2)
-        sleep(10)
-        exit()
-    else:
-        # pygame.mixer.Sound.play(erro)
-        resposta["text"] = 'Poxa, tente novamente'
-
-    x = n1  # Chance 3
-    if x == a:
-        # pygame.mixer.Sound.play(vitoria)
-        resposta["text"] = 'Parabéns!! Você acertou. O número que eu estou pensando é {}'.format(
-            a)
-        resposta["text"] = 'Tchaaaau'
-        pygame.mixer.music.fadeout(10000)
-        pygame.mixer.music.set_volume(0.2)
-        sleep(10)
-        exit()
-    else:
-        # pygame.mixer.Sound.play(erro)
-        resposta["text"] = 'Poxa, tente novamente'
-
-    x = n1  # Chance 4
-    if x == a:
-        # pygame.mixer.Sound.play(vitoria)
-        resposta["text"] = 'Parabéns!! Você acertou. O número que eu estou pensando é {}'.format(
-            a)
-        resposta["text"] = 'Tchaaaau'
-        pygame.mixer.music.fadeout(10000)
-        pygame.mixer.music.set_volume(0.2)
-        sleep(10)
-        exit()
-    else:
-        # pygame.mixer.Sound.play(erro)
-        resposta["text"] = 'Poxa, tente novamente'
-
-    x = n1  # Chance 5
-    if x == a:
-        # pygame.mixer.Sound.play(vitoria)
-        resposta["text"] = 'Parabéns!! Você acertou. O número que eu estou pensando é {}'.format(
-            a)
-        resposta["text"] = 'Tchaaaau'
-        pygame.mixer.music.fadeout(10000)
-        pygame.mixer.music.set_volume(0.2)
-        sleep(10)
-        exit()
-    else:
-        # pygame.mixer.Sound.play(erro)
-        resposta["text"] = 'Poxa, tente novamente'
-
-    x = n1  # Chance 6
-    if x == a:
-        # pygame.mixer.Sound.play(vitoria)
-        resposta["text"] = 'Parabéns!! Você acertou. O número que eu estou pensando é {}'.format(
-            a)
-        resposta["text"] = 'Tchaaaau'
-        pygame.mixer.music.fadeout(10000)
-        pygame.mixer.music.set_volume(0.2)
-        sleep(10)
-        exit()
-    else:
-        # pygame.mixer.Sound.play(erro)
-        pygame.mixer.music.fadeout(30000)
-        pygame.mixer.music.set_volume(0.2)
-        # pygame.mixer.Sound.play(erro)
-        resposta["text"] = 'pense um pouco mais e volte depois, tá?'
-        sleep(10)
-        exit()
+        pygame.mixer.Sound.play(erro)
+        resposta = 'Poxa, tente novamente'
+        Texto_resultado = Label(janela, text='', justify=CENTER)
+        Texto_resultado.grid(column=0, row=8)
+        Texto_resultado["text"] = resposta
+        return ()
 
 
 botão = Button(janela, text='Começar!', justify=CENTER, command=layout_game)
