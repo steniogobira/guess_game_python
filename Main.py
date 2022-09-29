@@ -9,7 +9,7 @@ text1 = Label(janela, text="""
 ======================================================
 
 Olá, vamos brincar?
-Irei pensar em um número de 0 a 10. Tente adivinhar
+Irei pensar em um número de 0 a 10. Tente adivinhar!!
 
 ======================================================
     """, justify=CENTER)
