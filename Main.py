@@ -35,28 +35,26 @@ def layout_game():
     data = StringVar()
     textbox = Entry(janela, textvariable=data)
     textbox.grid(column=0, row=4)
+    numero_aleatorio = randrange(11)
 
     botão = Button(janela, text='guess', justify=CENTER,
-                   command=lambda: guess(data))
+                   command=lambda: guess(data, numero_aleatorio))
     botão.grid(column=0, row=5)
 
 
-def guess(data):
+def guess(data, numero_aleatorio):
 
     erro = pygame.mixer.Sound("erro.mp3")
     vitoria = pygame.mixer.Sound("vitoria.mp3")
     pygame.mixer.Sound.set_volume(erro, 0.05)
     pygame.mixer.Sound.set_volume(vitoria, 0.05)
 
-    numero_aleatorio = randrange(11)
     numero_usuario = int(data.get())
-
     print(numero_aleatorio)
-
     if numero_aleatorio == numero_usuario:
         pygame.mixer.Sound.play(vitoria)
         resposta = """
-        Parabéns!! Você acertou. O número que eu estou pensando é {}""".format(a)
+        Parabéns!! Você acertou. O número que eu estou pensando é {}""".format(numero_aleatorio)
         pygame.mixer.music.fadeout(10000)
         pygame.mixer.music.set_volume(0.2)
         Texto_resultado = Label(janela, text='', justify=CENTER)
