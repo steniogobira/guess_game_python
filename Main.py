@@ -43,8 +43,7 @@ def layout_game():
     data = StringVar()
     textbox = Entry(frame1, textvariable=data)
     textbox.grid(column=0, row=8)
-    numero_aleatorio = 4
-    # randrange(11)
+    numero_aleatorio = randrange(11)
 
     botão = Button(frame1, text='Guess', justify=CENTER, font=(
         "Gotham", "13", "bold"), command=lambda: guess(data, numero_aleatorio))
