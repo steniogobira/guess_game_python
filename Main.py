@@ -9,7 +9,7 @@ janela = Tk()
 
 janela.title('Guess game')
 janela.resizable(False, False)
-janela.wm_attributes('-transparentcolor', 'black')
+
 
 imagebg = PhotoImage(file="bg.png")
 bg = Label(janela, image=imagebg)
